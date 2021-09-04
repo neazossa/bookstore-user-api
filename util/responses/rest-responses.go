@@ -1,27 +1,24 @@
 package responses
 
 import (
-	"time"
+	"github.com/neazossa/bookstore-user-api/util/date_utils"
 )
-
-type Epoch int64
 
 type Responses struct {
 	Status     string      `json:"status"`
 	Message    string      `json:"message"`
 	Error      string      `json:"error"`
 	Data       interface{} `json:"data"`
-	TimeServer Epoch       `json:"serverTime"`
+	TimeServer string      `json:"serverTime"`
 }
 
 func constructResponse(code string, message string, errors string, data interface{}) *Responses {
-	var ep = time.Now().Unix()
 	return &Responses{
 		Status:     code,
 		Message:    message,
 		Error:      errors,
 		Data:       data,
-		TimeServer: Epoch(ep),
+		TimeServer: date_utils.GetNowString(),
 	}
 }
 
